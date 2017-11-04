@@ -52,6 +52,7 @@ class UserSeriesSupplierView: FeedElementSupplierView {
         addSubview(contextLabel)
 
         feedControlButton = FeedControlButton(frame: .zero)
+        feedControlButton.isHidden = true //TODO: uncomment when we get feed control 
         feedControlButton.addTarget(self, action: #selector(didPressFeedControlButton), for: .touchUpInside)
         addSubview(feedControlButton)
         
@@ -65,7 +66,7 @@ class UserSeriesSupplierView: FeedElementSupplierView {
         
         contextImages.snp.makeConstraints { make in
             make.leading.equalToSuperview().inset(contextMarginX)
-            make.height.equalTo(contextImagesSize)
+            make.size.equalTo(contextImagesSize)
             make.centerY.equalToSuperview()
         }
         
@@ -79,15 +80,17 @@ class UserSeriesSupplierView: FeedElementSupplierView {
             make.centerY.equalToSuperview()
             make.width.equalTo(feedControlButtonWidth)
             make.height.equalTo(feedControlButtonHieght)
-            make.trailing.equalTo(feedControlButtonRightX)
+            make.trailing.equalToSuperview().inset(feedControlButtonRightX)
         }
         
         topLineseparator.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.trailing.equalToSuperview()
-            make.leading.equalToSuperview()
+            make.trailing.leading.bottom.equalToSuperview()
             make.height.equalTo(lineseparatorHeight)
         }
+        
+//        snp.makeConstraints { make in
+//            make.height.equalTo(height)
+//        }
         
         if let users = supplier as? [User] {
             setupWithUsers(users: users, feedContext: feedContext)

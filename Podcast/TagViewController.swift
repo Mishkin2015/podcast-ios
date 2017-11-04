@@ -139,6 +139,10 @@ class TagViewController: ViewController, UITableViewDelegate, UITableViewDataSou
         
     }
     
+    func recommendedSeriesTableViewCell(didSelectNullStateAt indexPath: IndexPath) {
+        
+    }
+    
     //MARK: - RecommendedEpisodesOuterTableViewCell DataSource & Delegate
     
     func recommendedEpisodesTableViewCell(cell: RecommendedEpisodesOuterTableViewCell, dataForItemAt indexPath: IndexPath) -> Episode {

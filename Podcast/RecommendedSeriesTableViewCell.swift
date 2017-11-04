@@ -15,12 +15,14 @@ protocol RecommendedSeriesTableViewCellDataSource: class {
 
 protocol RecommendedSeriesTableViewCellDelegate: class {
     func recommendedSeriesTableViewCell(cell: RecommendedSeriesTableViewCell, didSelectItemAt indexPath: IndexPath)
+    func recommendedSeriesTableViewCell(didSelectNullStateAt indexPath: IndexPath)
 }
 
 class RecommendedSeriesTableViewCell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
     
     static var recommendedSeriesTableViewCellHeight: CGFloat = 165
     
+    var showNullState: Bool = false
     var collectionView: UICollectionView!
     weak var dataSource: RecommendedSeriesTableViewCellDataSource?
     weak var delegate: RecommendedSeriesTableViewCellDelegate?
@@ -45,10 +47,12 @@ class RecommendedSeriesTableViewCell: UITableViewCell, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if showNullState { return 1 }
         return dataSource?.numberOfRecommendedSeries(forRecommendedSeriesTableViewCell: self) ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if showNullState { return NullGridCollectionViewCell() }
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as? SeriesGridCollectionViewCell else { return SeriesGridCollectionViewCell() }
         guard let series = dataSource?.recommendedSeriesTableViewCell(cell: self, dataForItemAt: indexPath) else { return SeriesGridCollectionViewCell() }
         cell.configureForSeries(series: series)
@@ -56,7 +60,7 @@ class RecommendedSeriesTableViewCell: UITableViewCell, UICollectionViewDelegate,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        delegate?.recommendedSeriesTableViewCell(cell: self, didSelectItemAt: indexPath)
+        showNullState ? delegate?.recommendedSeriesTableViewCell(didSelectNullStateAt: indexPath) : delegate?.recommendedSeriesTableViewCell(cell: self, didSelectItemAt: indexPath)
     }
     
     required init?(coder aDecoder: NSCoder) {

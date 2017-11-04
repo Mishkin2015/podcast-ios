@@ -43,6 +43,7 @@ class FeedViewController: ViewController, UITableViewDelegate, UITableViewDataSo
         feedTableView.register(FeedElementTableViewCell.self, forCellReuseIdentifier: "FeedElementTableViewCellIdentifier")
         mainScrollView = feedTableView
         view.addSubview(feedTableView)
+        feedTableView.estimatedRowHeight = 44
         feedTableView.rowHeight = UITableViewAutomaticDimension
         feedTableView.reloadData()
         feedTableView.addInfiniteScroll { (tableView) -> Void in

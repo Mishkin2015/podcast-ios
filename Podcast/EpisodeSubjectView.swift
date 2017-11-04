@@ -120,13 +120,14 @@ class EpisodeSubjectView: FeedElementSubjectView {
             make.top.greaterThanOrEqualTo(podcastImage.snp.bottom).offset(marginSpacing)
             make.leading.equalToSuperview().inset(descriptionLabelX)
             make.trailing.equalTo(episodeNameLabel.snp.trailing)
+            make.bottom.equalToSuperview()
         }
         
         mainView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.bottom.equalTo(descriptionLabel.snp.bottom)
+            //make.bottom.equalTo(descriptionLabel.snp.bottom)
         }
         
         episodeUtilityButtonBarView.snp.makeConstraints { make in

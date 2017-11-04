@@ -100,6 +100,7 @@ class ProfileHeaderView: UIView {
         moreButton = UIButton(type: .custom)
         moreButton.setImage(UIImage(named: "more_icon_white"), for: .normal)
         moreButton.adjustsImageWhenHighlighted = true
+        moreButton.isHidden = true //TODO: change when we have something this button can do
         moreButton.addTarget(self, action: #selector(moreButtonPressed), for: .touchUpInside)
         profileArea.addSubview(moreButton)
         

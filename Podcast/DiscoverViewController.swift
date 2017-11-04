@@ -135,6 +135,10 @@ class DiscoverViewController: ViewController, UITableViewDelegate, UITableViewDa
         
     }
     
+    func recommendedSeriesTableViewCell(didSelectNullStateAt indexPath: IndexPath) {
+        
+    }
+    
     //MARK: - RecommendedTagsTableViewCell DataSource & Delegate
     
     func recommendedTagsTableViewCell(cell: RecommendedTagsTableViewCell, dataForItemAt indexPath: IndexPath) -> Tag {

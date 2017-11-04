@@ -187,7 +187,7 @@ class ExternalProfileViewController: ViewController, UITableViewDataSource, UITa
         subscriptionsRequest.success = { (subscriptionsEndpointRequest: EndpointRequest) in
             guard let results = subscriptionsEndpointRequest.processedResponseValue as? [Series] else { return }
             self.subscriptions = results
-            
+            //self.profileTableView[0]
             // Need guard in case view hasn't been created
             guard let profileTableView = self.profileTableView else { return }
             profileTableView.reloadData()
@@ -308,8 +308,7 @@ class ExternalProfileViewController: ViewController, UITableViewDataSource, UITa
         case 0:
             return RecommendedSeriesTableViewCell.recommendedSeriesTableViewCellHeight
         case 1:
-            guard let favoriteEpisodes = favorites else { return 0 }
-            return CGFloat(favoriteEpisodes.count) * EpisodeSubjectView.episodeSubjectViewHeight
+            return UITableViewAutomaticDimension
         default:
             return 0
         }
@@ -350,6 +349,10 @@ class ExternalProfileViewController: ViewController, UITableViewDataSource, UITa
         guard let subscriptions = subscriptions else { return }
         let seriesDetailViewController = SeriesDetailViewController(series: subscriptions[indexPath.row])
         navigationController?.pushViewController(seriesDetailViewController, animated: true)
+    }
+    
+    func recommendedSeriesTableViewCell(didSelectNullStateAt indexPath: IndexPath) {
+        
     }
     
     // MARK: - RecommendedEpisodesOuterTableViewCell DataSource & Delegate
